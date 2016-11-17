@@ -16,7 +16,6 @@
   <run_depend>segway_msgs</run_depend>
   <run_depend>segway_description</run_depend>
   <run_depend>segway_config</run_depend>
-  <run_depend>si_utils</run_depend>
 
   <export>
     <metapackage/>
