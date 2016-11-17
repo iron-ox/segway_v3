@@ -1,6 +1,10 @@
 <!-- Launch file for Segway platform startup -->
 
 <launch>
+    <!-- Address of segway control computer on the robot's internal network -->
+    <arg name="segway_ip_address"/>
+    <arg name="segway_ip_port"/>
+
     <!-- Whether the segway is powering the computer. If set to true, then the a watchdog node is started that will shut the computer
          down when the robot shuts down. We don't set a default for this argument because setting it incorrectly is pretty bad - either
          you shutdown a computer that you shouldn't (annoying to debug) or you fail to shutdown and onboard computer (battery gets
@@ -19,6 +23,8 @@
 
      <!-- Segway Base platform ROS Driver -->
      <node pkg="segway_ros" ns="segway" type="segway_driver" name="segway_driver" respawn="true" output="screen">
+       <param name="segway_ip_address" value="$(arg segway_ip_address)" />
+       <param name="segway_ip_port" value="$(arg segway_ip_port)" />
        <param name="platform" value="$(arg base_platform)" />
        <param name="use_platform_odometry" value="$(arg use_platform_odometry)" />
        <param name="ext_imu_src" value="um7_imu" if="$(arg has_um7_imu)"/>

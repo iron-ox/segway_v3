@@ -144,8 +144,11 @@ class SegwayDriver:
         interface = rospy.get_param('~interface','eth')
         self.tx_queue_ = multiprocessing.Queue()
         self.rx_queue_ = multiprocessing.Queue()
+        segway_ip_address = rospy.get_param('~segway_ip_address')
+        segway_ip_port = rospy.get_param('~segway_ip_port')
+
         if ('eth' == interface):
-            self.comm = IoEthThread((os.environ['SEGWAY_IP_ADDRESS'],int(os.environ['SEGWAY_IP_PORT_NUM'])),
+            self.comm = IoEthThread((segway_ip_address, segway_ip_port),
                                     self.tx_queue_,
                                     self.rx_queue_,
                                     max_packet_size=1248)
