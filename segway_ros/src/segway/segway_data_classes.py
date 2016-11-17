@@ -551,9 +551,8 @@ class RMP_Dynamics:
         self._use_platform_odometry = rospy.get_param('~use_platform_odometry',False)
         self._MsgData = Dynamics()
         self._MsgPub = rospy.Publisher('/segway/feedback/dynamics', Dynamics, queue_size=10)
-        self._jointStatePub = rospy.Publisher('rmp_joint_states', JointState, queue_size=10)
+        self._jointStatePub = rospy.Publisher('joint_states', JointState, queue_size=10)
         self._jointStateMsg = JointState()
-        
         
         if 2 == num_wheels:
             names = ['left_wheel','right_wheel']
