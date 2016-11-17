@@ -92,12 +92,16 @@ class SegwayTeleop:
             """
             self.config_updated = False
             rospy.Subscriber("/segway/feedback/configuration", Configuration, self._update_configuration_limits)
-            rospy.sleep(1.0)
-            
-            if (False == self.config_updated):
-                rospy.logerr("Timed out waiting for RMP feedback topics make sure the driver is running")
-                sys.exit(0)
-                return
+
+            wait_for_configuration_start_time = rospy.Time.now()
+            wait_for_configuration_rate = rospy.Rate(10.0)
+            while not rospy.is_shutdown():
+                if (rospy.Time.now() - wait_for_configuration_start_time).to_sec() > 5.0:
+                    rospy.logerr("Timed out waiting for RMP feedback topics make sure the driver is running")
+                    sys.exit(0)
+                if (True == self.config_updated):
+                    break
+                wait_for_configuration_rate.sleep()
         else:
             self.vel_limit_mps = rospy.get_param('~sim_teleop_vel_limit_mps',0.5)
             self.yaw_rate_limit_rps = rospy.get_param('~sim_teleop_yaw_rate_limit_rps',0.5)
