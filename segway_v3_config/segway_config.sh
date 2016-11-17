@@ -21,8 +21,8 @@ export SEGWAY_HAS_BSA=false
 # Platform name for specific URDF models and configurations; the base platform is
 # used for drivers, sim controllers, etc; the platform name is for special URDF/Sensor
 # configurations. In general they should be the same unless we built you a custom system
-export SEGWAY_BASE_PLATFORM=RMP_210
-export SEGWAY_PLATFORM_NAME=RMP_210
+export SEGWAY_BASE_PLATFORM=RMP_OMNI
+export SEGWAY_PLATFORM_NAME=RMP_OMNI
 
 # Defines the location of the sensors frames and the UI box
 # they all move together for the navigator elite. This is the point at the
@@ -53,28 +53,28 @@ export SEGWAY_JOY_DEADZONE=0.1
 export SEGWAY_USE_VOXEL_GRID=false
 
 # External IMU configuration;
-export SEGWAY_HAS_EXT_IMU=false
-export SEGWAY_HAS_UM7_IMU=false
+export SEGWAY_HAS_EXT_IMU=true
+export SEGWAY_HAS_UM7_IMU=true
 export SEGWAY_UM7_DEV="/dev/serial/by-path/pci-0000:00:14.0-usb-0:3:1.0-port0"
 export EXT_IMU_XYZ="-0.25203 0.130 0.0715"
 export EXT_IMU_RPY="3.1415 0 3.1415"
 
 # GPS configuration
-export SEGWAY_HAS_GPS=false
-export SEGWAY_HAS_NEO7=false
+export SEGWAY_HAS_GPS=true
+export SEGWAY_HAS_NEO7=true
 export SEGWAY_NEO7_DEV="/dev/serial/by-path/pci-0000:00:14.0-usb-0:4:1.0-port0"
 export GPS_XYZ="0.5 0 0.25409"
 export GPS_RPY="0 0 0"
 
 # 2D scanner configuration for launch files; should change hokuyo
 # to sick if using a SICK LMS1XX
-export SEGWAY_HAS_ONE_2D_LASER=false
-export SEGWAY_HAS_SECOND_2D_LASER=false
+export SEGWAY_HAS_ONE_2D_LASER=true
+export SEGWAY_HAS_SECOND_2D_LASER=true
 
 # Hokuyo configuration (only supports two by default) watch 
 # wavelength on multi-laser systems
 export SEGWAY_LASER1_IS_HOKUYO=false
-export SEGWAY_LASER1_IS_SICK_TIM=false
+export SEGWAY_LASER1_IS_SICK_TIM=true
 export SEGWAY_LASER1_IP=10.66.171.8
 export SEGWAY_LASER1_PORT=2112
 #Uncomment below and comment line above for hokuyo
@@ -86,7 +86,7 @@ export LASER1_MIN_RANGE=0.01
 export LASER1_PREFIX="front"
 
 export SEGWAY_LASER2_IS_HOKUYO=false
-export SEGWAY_LASER2_IS_SICK_TIM=false
+export SEGWAY_LASER2_IS_SICK_TIM=true
 export SEGWAY_LASER2_IP=10.66.171.9
 export SEGWAY_LASER2_PORT=2112
 #Uncomment below and comment line above for hokuyo
