@@ -66,7 +66,7 @@ machine_id = 1
 has_external_imu = 0
 has_brakes = 0
 has_segway_bsa = 0
-num_wheels = 2
+num_wheels = 4
 wheel_circum = 0.542391 * math.pi
 
 
