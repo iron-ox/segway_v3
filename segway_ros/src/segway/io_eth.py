@@ -53,11 +53,12 @@ import threading
 import os
 
 class IoEthThread:
-    def __init__(self,remote_address,tx_queue,rx_queue,max_packet_size=1500):
+    def __init__(self, remote_address, remote_port, tx_queue, rx_queue, max_packet_size=1500):
         self.tx_queue = tx_queue
         self.rx_queue = rx_queue
         self.max_packet_size = max_packet_size
         self.remote_address = remote_address
+        self.remote_port = remote_port
  
         """
         Initialize the UDP connection
@@ -66,15 +67,16 @@ class IoEthThread:
             self.conn = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.conn.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
             self.conn.setblocking(0)
-            self.conn.bind((os.environ['ROS_IP'],self.remote_address[1]))
-            self.conn.connect(self.remote_address)
-        except:
+            self.conn.connect((self.remote_address, self.remote_port))
+        except Exception:
             try:
                 self.conn.close()
             except:
                 pass
             self.link_up = False
-            return
+            # Raise exception to make debugging easier. Should actually wrap the low level exception in something
+            # more descriptive.
+            raise
 
         self.need_to_terminate = False
         self.listen_terminate_mutex = threading.RLock()

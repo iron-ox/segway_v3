@@ -148,7 +148,9 @@ class SegwayDriver:
         segway_ip_port = rospy.get_param('~segway_ip_port')
 
         if ('eth' == interface):
-            self.comm = IoEthThread((segway_ip_address, segway_ip_port),
+            rospy.loginfo('Connecting to RMP at {}:{}'.format(segway_ip_address, segway_ip_port))
+            self.comm = IoEthThread(segway_ip_address,
+                                    segway_ip_port,
                                     self.tx_queue_,
                                     self.rx_queue_,
                                     max_packet_size=1248)
