@@ -11,13 +11,6 @@
          drained) -->
     <arg name="segway_powers_pc"/>
 
-    <!-- Configuration of this specific segway RMP -->
-    <arg name="base_platform"/> <!-- for example RMP_210 or RMP_OMNI -->
-    <arg name="platform_name"/> <!-- for example RMP_210 or RMP_OMNI -->
-    <arg name="use_platform_odometry" default="false"/>
-    <arg name="has_um7_imu" default="false"/>
-    <arg name="has_microstrain_3dm_gx3_35" default="false"/>
-
     <!-- Segway System Watchdog is necessary for onboard PC -->
     <node pkg="segway_ros" type="segway_wd" name="segway_wd" respawn="true" if="$(arg segway_powers_pc)"/>
 
@@ -31,7 +24,7 @@
        <param name="ext_imu_src" value="3dm_gx3" if="$(arg has_microstrain_3dm_gx3_35)"/>
      </node>
 
-     <!-- Platform specific robot state publisher and parameters -->
+     <!-- Load robot description -->
      <include file="$(find segway_description)/launch/description.launch">
        <arg name="robot_name" value="$(arg platform_name)"/>
      </include>
