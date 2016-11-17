@@ -17,8 +17,6 @@
     <run_depend>yocs_cmd_vel_mux</run_depend>
     <run_depend>urg_node</run_depend>
     <run_depend>segway_ros</run_depend>
-    <run_depend>segway_upstart</run_depend>
-    <run_depend>si_utils</run_depend>
     <run_depend>segway_v3_config</run_depend>
 
 	<export>
