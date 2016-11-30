@@ -26,13 +26,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="sick_tim">
   
     <xacro:macro name="sick_tim" params="laser_prefix parent *origin">
-        <joint name="${laser_prefix}_laser_joint" type="fixed">
+        <joint name="${laser_prefix}_joint" type="fixed">
             <xacro:insert_block name="origin" />
             <parent link="${parent}" />
-            <child link="${laser_prefix}_laser_link" />
+            <child link="${laser_prefix}_link" />
         </joint>
 
-        <link name="${laser_prefix}_laser_link">
+        <link name="${laser_prefix}_link">
             <visual>
                 <geometry>
                     <mesh filename="package://segway_description/meshes/visual/sensors/sick_tim.dae" />
@@ -45,8 +45,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
             </collision>
         </link>
 
-        <gazebo reference="${laser_prefix}_laser_link">
-            <sensor type="ray" name="${laser_prefix}_hokuyo_laser">
+        <gazebo reference="${laser_prefix}_link">
+            <sensor type="ray" name="${laser_prefix}">
                 <pose>0 0 0 0 0 0</pose>
                 <visualize>false</visualize>
                 <update_rate>50</update_rate>
@@ -71,8 +71,14 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
                     </noise>
                 </ray>
                 <plugin name="hokuyo_node" filename="libgazebo_ros_laser.so">
-                    <topicName>/segway/${laser_prefix}_scan</topicName>
-                    <frameName>/segway/${laser_prefix}_laser_link</frameName>
+                    <topicName>${laser_prefix}/scan</topicName>
+
+                    <!-- This has to be an absolute frame name (start with slash)
+                         because otherwise the plugin prefixes it with the name
+                         of the robot.  Most other code that uses TF2 no longer
+                         supports prefix, so we make sure this doesn't use a
+                         prefix either. -->
+                    <frameName>/${laser_prefix}_link</frameName>
                 </plugin>
             </sensor>
         </gazebo>
