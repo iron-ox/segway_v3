@@ -140,13 +140,13 @@ class SegwayTeleop:
         self.last_joy = rospy.get_time()
             
         self.cfg_cmd = ConfigCmd()
-        self.cfg_pub = rospy.Publisher('/segway/gp_command', ConfigCmd, queue_size=10)
-        self.goalrecorder_pub = rospy.Publisher('/segway/record_pose',Bool, queue_size=10)
+        self.cfg_pub = rospy.Publisher('gp_command', ConfigCmd, queue_size=10)
+        self.goalrecorder_pub = rospy.Publisher('record_pose',Bool, queue_size=10)
         
         self.motion_cmd = Twist()
         self.limited_cmd = Twist()
-        self.motion_pub = rospy.Publisher('/segway/teleop/cmd_vel', Twist, queue_size=10)
-        self.override_pub = rospy.Publisher("/segway/manual_override/cmd_vel",Twist, queue_size=10)
+        self.motion_pub = rospy.Publisher('cmd_vel/teleop', Twist, queue_size=10)
+        self.override_pub = rospy.Publisher("cmd_vel/manual_override",Twist, queue_size=10)
 
         rospy.sleep(1.0)
         self.cfg_cmd.header.stamp = rospy.get_rostime()
@@ -154,7 +154,7 @@ class SegwayTeleop:
         self.cfg_cmd.gp_param = MOTOR_AUDIO_PLAY_ENTER_ALARM_SONG
         self.cfg_pub.publish(self.cfg_cmd)
 
-        rospy.Subscriber('/joy', Joy, self._segway_teleop)
+        rospy.Subscriber('joy', Joy, self._segway_teleop)
         
     def _update_configuration_limits(self,config):
         
