@@ -91,7 +91,7 @@ class SegwayTeleop:
             Subscribe to the configuration message
             """
             self.config_updated = False
-            rospy.Subscriber("/segway/feedback/configuration", Configuration, self._update_configuration_limits)
+            rospy.Subscriber("feedback/configuration", Configuration, self._update_configuration_limits)
 
             wait_for_configuration_start_time = rospy.Time.now()
             wait_for_configuration_rate = rospy.Rate(10.0)
@@ -146,7 +146,7 @@ class SegwayTeleop:
         self.motion_cmd = Twist()
         self.limited_cmd = Twist()
         self.motion_pub = rospy.Publisher('cmd_vel/teleop', Twist, queue_size=10)
-        self.override_pub = rospy.Publisher("cmd_vel/manual_override",Twist, queue_size=10)
+        self.override_pub = rospy.Publisher('cmd_vel/manual_override',Twist, queue_size=10)
 
         rospy.sleep(1.0)
         self.cfg_cmd.header.stamp = rospy.get_rostime()
