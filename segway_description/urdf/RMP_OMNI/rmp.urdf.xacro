@@ -61,13 +61,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
 
-      <plugin name="gazebo_ros_force_based_move" filename="libgazebo_ros_force_based_move.so">
+      <plugin name="segway_ros_force_based_move" filename="libsegway_ros_force_based_move.so">
         <commandTopic>cmd_vel</commandTopic>
         <odometryTopic>odom</odometryTopic>
         <odometryFrame>odom</odometryFrame>
-        <odometryRate>25.0</odometryRate>
-        <robotBaseFrame>base_link</robotBaseFrame>
+        <odometryRate>100.0</odometryRate>
         <cmdVelTimeOut>0.25</cmdVelTimeOut>
+        <robotBaseFrame>base_link</robotBaseFrame>
         <publishOdometryTf>0</publishOdometryTf>
         <yaw_velocity_p_gain>500.0</yaw_velocity_p_gain>
         <x_velocity_p_gain>10000.0</x_velocity_p_gain>
